@@ -1,0 +1,8 @@
+{
+  "framerate":3,
+  "images":["img/flames.png"],
+  "frames": {"width":150, "height":290, "regX":0, "regY":0},
+  "animations": {
+    "fire":[0,7]
+  }
+}

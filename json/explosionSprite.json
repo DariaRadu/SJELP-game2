@@ -1,0 +1,15 @@
+{
+  "framerate":2,
+  "images":["img/explosion.png"],
+  "frames": {"width":256, "height":256, "regX":0, "regY":0},
+  "animations": {
+    "explode1":[0],
+    "explode2":[1],
+    "explode3":[2],
+    "explode4":[3],
+    "explode5":[4],
+    "explode6":[5],
+    "explode7":[6],
+    "explode8":[7]
+  }
+}
