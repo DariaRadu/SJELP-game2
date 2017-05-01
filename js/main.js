@@ -2,8 +2,7 @@
  * Created by Daria on 31-Jan-17.
  */
 var cloudA, cloudB, cloudA2, cloudB2, city, city2, mountain, mountain2;
-var stage, bg, bg2, timeoutResize, startContainer, firstText;
-var skipButton, goButton;
+var stage, timeoutResize
 var train, gun, enemyShip, platform;
 var effectActive=false, moveStop=false, moveToRocket=false;
 var shots=[], enemyShots=[];
@@ -39,9 +38,8 @@ function init() {
     muteButton.cursor='pointer';
     stage.addChild(muteButton);
 
-    //backgroundOpacity(0.2);
 
-    createjs.Ticker.setFPS(60);
+    createjs.Ticker.setFPS(45);
     createjs.Ticker.addEventListener('tick', tock);
 
     stage.enableMouseOver();
@@ -81,7 +79,7 @@ function game(){
         document.querySelector('#demoCanvas').classList.add('show');
     }, 300);
 
-    stage.removeChild(firstText, skipButton,goButton);
+    //stage.removeChild(firstText, skipButton,goButton);
 
     /*createClouds();*/
     //backgroundOpacity(1);
@@ -96,15 +94,16 @@ function tock() {
     if (!moveStop){
         moveTrain();
     }
-    moveShots();
-    moveEnemyShots();
     
     if (effectActive){
         backgroundEffect(2);
         moveSpaceship();
+
     }
+    moveShots();
+    moveEnemyShots();
+
     if (enemyShip){
-        moveEnemyShots();
         if(!enemyShip.alive){
             goToRocket();
         }
@@ -114,10 +113,10 @@ function tock() {
         backgroundEffect(4);
         cloudEffect(4);
     }
+
     if(cloudA){
         cloudEffect(1);
     }
-
 
     stage.update();
 
@@ -146,7 +145,8 @@ function resize() {
 
         bg2.scaleX = parseFloat(stage.canvas.width / bg.img.width);
         bg2.scaleY = parseFloat(stage.canvas.height / bg.img.height);*/
-
+       //stage.reload();
+        /*stage.cache(0,0,stage.canvas.width, stage.canvas.height);*/
         resizeContent();
     },200);
 
@@ -202,10 +202,12 @@ function createMountains(){
 function createCity(){
     city = new createjs.Shape();
     city.x=0;
+    city.y=-60;
     city.img = queue.getResult('city');
 
     city2 = new createjs.Shape();
     city2.x=0;
+    city2.y=-60;
     city2.img = queue.getResult('city');
 }
 
@@ -401,8 +403,8 @@ function resizeContent(){
     }
 
     if(button){
-        button.x=stage.canvas.width/5;
-        button.y=stage.canvas.height/5;
+        button.x=stage.canvas.width/2;
+        button.y=stage.canvas.height/4;
 
        /* buttonText.x=button.x-button.width/2+5;
         buttonText.y=button.y-button.height/2;*/
@@ -460,8 +462,8 @@ function resizeContent(){
         startText.x=stage.canvas.width/2;
         startText.y=stage.canvas.height-30;
 
-        house.x=0;
-        house.y=stage.canvas.height-house.height-(stage.canvas.height/11);
+        /*house.x=0;
+        house.y=stage.canvas.height-house.height-(stage.canvas.height/11);*/
     }
 
    /* if (firstText){
@@ -481,10 +483,8 @@ function resizeContent(){
     if (cloudBig){
         cloudBig.x=stage.canvas.width/2;
         cloudBig.y=stage.canvas.height/2;
-    }
-
-    if (logo){
         logo.x=stage.canvas.width/2;
         logo.y=stage.canvas.height/2;
     }
+
 }

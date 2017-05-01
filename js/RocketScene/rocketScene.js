@@ -133,7 +133,7 @@ function buttonLaunch(){
     /*button.graphics.beginFill("blue").drawRect(0,0,button.width,button.height);*/
     button.regX=button.width/2;
     button.regY=button.height/2;
-    button.x=stage.canvas.width/4;
+    button.x=stage.canvas.width/2;
     button.y=stage.canvas.height/4;
 
     /*buttonText = new createjs.Text("LAUNCH", "30px Arial Black", "#FFF");

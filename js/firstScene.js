@@ -1,19 +1,21 @@
 /**
  * Created by Daria on 02-Mar-17.
  */
-var modules, grid=[], boxModules=[], modulesAdded=[];
+var modules, grid=[], modulesAdded=[];
 var gridWidth=100, gridHeight=100;
-var spaceBetween, n=0, animation, modulesCounter=0;
+var animation;
 var buttonStart, startText, house;
 
 function firstScene(){
     var row, col, img;
 
-    house = new createjs.Bitmap(queue.getResult("house"));
+    /*house = new createjs.Bitmap(queue.getResult("house"));
     house.width=300;
     house.height=200;
     house.x=0;
-    house.y=stage.canvas.height-house.height-(stage.canvas.height/11);
+    house.y=stage.canvas.height-house.height-(stage.canvas.height/15);
+    house.scaleX = 0.5;
+    house.scaleY = 0.5;*/
 
     buttonStart = new createjs.Bitmap(queue.getResult("doneButton"));
     /*buttonStart.graphics.clear();*/
@@ -30,6 +32,8 @@ function firstScene(){
     startText.textBaseline="middle";
     startText.x=stage.canvas.width/2;
     startText.y=stage.canvas.height-30;
+    rec = startText.getBounds();
+
 
     /*startContainer = new createjs.Container();
     startContainer.addChild(buttonStart, startText);*/
@@ -111,14 +115,22 @@ function addModules(){
             if (!t.moduleAdded){
                 t.addEventListener('click', moduleEffect);
                 t.moduleAdded=1;
+                t.addEventListener('mouseover', function(e){
+                    e.target.scaleX=e.target.scaleX*1.2;
+                    e.target.scaleY=e.target.scaleY*1.2;
+                });
+                t.addEventListener('mouseout', function(e){
+                    e.target.scaleX=e.target.scaleX/1.2;
+                    e.target.scaleY=e.target.scaleY/1.2;
+                });
             }
 
         }
     }
+
     stage.addChild(train, gun, trees, trees2, startText, house);
 
-
-function moduleEffect(e){
+    function moduleEffect(e){
     //modulesCounter++;
     //console.log(modulesCounter);
     e.target.clicked++;
@@ -200,7 +212,7 @@ function goToSpaceship(){
                     , 300,
                     createjs.Ease.linear)
                     .call(function(){
-                        stage.removeChild(t, buttonStart);
+                        stage.removeChild(t);
                         animation=1;
                         setTimeout(function(){
                             animation=0;
@@ -210,13 +222,7 @@ function goToSpaceship(){
                     })
             }
         }
-        createjs.
-            Tween.
-            get(house).
-            to({
-            alpha:0}
-            ,300, createjs.Ease.linear);
-
+        stage.removeChild(buttonStart);
         setTimeout(shootingScene, 3000)
     }
 }

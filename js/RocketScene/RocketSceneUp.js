@@ -35,6 +35,11 @@ function UpScene() {
 function UpScene2(){
     rocket.y = stage.canvas.height+1000;
     fire.y= stage.canvas.height+rocket.height/2+1000;
+    /*cloudA.scaleX=1.5;
+    cloudA.scaleY=1.5;
+
+    cloudA2.scaleX=1.5;
+    cloudA2.scaleY=1.5;*/
 
     createjs.Tween.get(fire).to({
         y:-1000+rocket.height/2

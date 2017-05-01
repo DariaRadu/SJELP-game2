@@ -78,10 +78,11 @@ function explode(){
     direction.x=0;
     direction.y=0;
     explosionSpriteSheet = new createjs.SpriteSheet(queue.getResult("explosionSprite"));
-     var explosion = new createjs.Sprite(explosionSpriteSheet, "explode1");
+     var explosion = new createjs.Sprite(explosionSpriteSheet, "explode");
      explosion.x = enemyShip.x-enemyShip.width/2;
      explosion.y = enemyShip.y-enemyShip.height/2;
-     var n=40;
+     /*var n=40;
+
      setTimeout(function(){
          explosion.gotoAndPlay('explode2');
      },n);
@@ -110,7 +111,7 @@ function explode(){
             .call(function(){
                 stage.removeChild(explosion);
             })
-    },8*n);
+    },8*n);*/
      /*explosion.scaleX=3;
      explosion.scaleY=3;*/
     stage.addChild(explosion);
