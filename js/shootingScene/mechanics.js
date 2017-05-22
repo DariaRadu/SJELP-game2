@@ -1,8 +1,6 @@
 /**
  * Created by Daria on 21-Feb-17.
  */
-var bmpSeq;
-
 function shootingScene(){
     window.addEventListener("keydown", moveOrShootControls);
     window.addEventListener("keyup", resetControls);
@@ -57,8 +55,6 @@ function shootingScene(){
 
 function shoot(){
     var shot = new createjs.Bitmap(queue.getResult("shot"));
-    /*shot.graphics.beginFill("#ff9d18");
-    shot.graphics.drawRect(0,0,10,10);*/
     shot.width = 10;
     shot.height = 10;
     shot.x = gun.x-shot.width/2;
@@ -120,8 +116,6 @@ function explode(){
 
 function enemyShoot(){
     var shot = new createjs.Bitmap(queue.getResult("shot2"));
-    /*shot.graphics.beginFill("#ff6100");
-    shot.graphics.drawRect(0,0,10,10);*/
     shot.width = 10;
     shot.height = 10;
     shot.x = enemyShip.x-shot.width/2;

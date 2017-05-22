@@ -9,19 +9,9 @@ var buttonStart, startText, house;
 function firstScene(){
     var row, col, img;
 
-    /*house = new createjs.Bitmap(queue.getResult("house"));
-    house.width=300;
-    house.height=200;
-    house.x=0;
-    house.y=stage.canvas.height-house.height-(stage.canvas.height/15);
-    house.scaleX = 0.5;
-    house.scaleY = 0.5;*/
-
     buttonStart = new createjs.Bitmap(queue.getResult("doneButton"));
-    /*buttonStart.graphics.clear();*/
     buttonStart.width=150;
     buttonStart.height=50;
-   /* buttonStart.graphics.beginFill("blue").drawRect(0,0,buttonStart.width,buttonStart.height);*/
     buttonStart.regX=buttonStart.width/2;
     buttonStart.regY=buttonStart.height/2;
     buttonStart.x=window.innerWidth-buttonStart.width*2;
@@ -34,9 +24,6 @@ function firstScene(){
     startText.y=stage.canvas.height-30;
     rec = startText.getBounds();
 
-
-    /*startContainer = new createjs.Container();
-    startContainer.addChild(buttonStart, startText);*/
     stage.addChild(buttonStart);
     buttonStart.cursor = "pointer";
 
@@ -82,20 +69,6 @@ function firstScene(){
             t.regX=gridWidth/2;
             t.regY=gridHeight/2;
 
-           /* t.x=stage.canvas.width/3*col;
-            t.y=stage.canvas.height/3*row;*/
-
-           /* if (col==0){
-                t.x=t.x+stage.canvas.width/6;
-            }
-            if (col==modules[row].length-1){
-                t.x=t.x-stage.canvas.width/6;
-            }
-
-            if (row==0){
-                t.y=t.y+stage.canvas.height/6
-            }*/
-
             t.clicked=0;
             t.cursor = "pointer";
             t.moduleAdded=0;
@@ -128,11 +101,9 @@ function addModules(){
         }
     }
 
-    stage.addChild(train, gun, trees, trees2, startText, house);
+    stage.addChild(train, gun, /*trees, trees2, */startText, house);
 
     function moduleEffect(e){
-    //modulesCounter++;
-    //console.log(modulesCounter);
     e.target.clicked++;
     console.log(e.target.clicked);
     e.target.removeEventListener(e.type, arguments.callee);
@@ -200,6 +171,7 @@ function addModules(){
 }
 
 function goToSpaceship(){
+    createjs.Tween.removeAllTweens();
     if (modulesAdded.length>0){
         for (var row=0;row<grid.length;row++){
             for (var col=0;col<grid[row].length;col++){

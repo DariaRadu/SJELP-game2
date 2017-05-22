@@ -2,7 +2,7 @@
  * Created by Daria on 16-Mar-17.
  */
 
-var logo, cloudBig, rocketUp=false;
+var logo, cloudBig, rocketUp=false, siteButton;
 
 
 function UpScene() {
@@ -13,8 +13,8 @@ function UpScene() {
     stage.update();
     cloudA.y = cloudA.y + margin;
     cloudA2.y = cloudA2.y + margin;
-    cloudB.y = cloudB.y + margin;
-    cloudB.y = cloudB2.y + margin;
+    /*cloudB.y = cloudB.y + margin;
+    cloudB.y = cloudB2.y + margin;*/
 
     rocket.x=stage.canvas.width/2;
     rocket.y = stage.canvas.height+1000;
@@ -35,6 +35,12 @@ function UpScene() {
 function UpScene2(){
     rocket.y = stage.canvas.height+1000;
     fire.y= stage.canvas.height+rocket.height/2+1000;
+    cloudA.scaleX=0.7;
+    cloudA.scaleY=0.7;
+
+    cloudA2.scaleX=0.7;
+    cloudA2.scaleY=0.7;
+
     /*cloudA.scaleX=1.5;
     cloudA.scaleY=1.5;
 
@@ -54,6 +60,12 @@ function UpScene2(){
 function UpScene3(){
     rocket.y = stage.canvas.height+rocket.height;
     rocket.alpha=1;
+
+    cloudA.scaleX=0.5;
+    cloudA.scaleY=0.5;
+
+    cloudA2.scaleX=0.5;
+    cloudA2.scaleY=0.5;
 
     cloudBig = new createjs.Bitmap(queue.getResult("cloudBig"));
     cloudBig.width=1328;
@@ -85,8 +97,19 @@ function showLogo(){
     logo.alpha=0;
     logo.x=stage.canvas.width/2;
     logo.y=stage.canvas.height/2;
+    logo.scaleX=0.9;
+    logo.scaleY=0.9;
 
-    stage.addChild(logo);
+    siteButton = new createjs.Bitmap (queue.getResult("siteButton"));
+    siteButton.width=150;
+    siteButton.height=50;
+    siteButton.alpha=0;
+    siteButton.regX=siteButton.width/2;
+    siteButton.regY=siteButton.height/2;
+    siteButton.x=stage.canvas.width/2;
+    siteButton.y=logo.y+logo.width/2;
+
+    stage.addChild(logo, siteButton);
 
    /* createjs.Tween.get(cloudBig).to({
         alpha:0
@@ -97,7 +120,16 @@ function showLogo(){
 
     createjs.Tween.get(logo).to({
         alpha:1
-    }, 1000, createjs.Ease.cubicIn);
-
-
+    }, 1000, createjs.Ease.cubicIn)
+        .call(function(){
+            createjs.Tween.get(siteButton).to({
+                alpha:1
+            }, 500, createjs.Ease.cubicIn)
+                .call(function(){
+                    siteButton.cursor = "pointer";
+                    siteButton.addEventListener('click',function(){
+                        location.href = "http://www.sjelp.com/";
+                    })
+                })
+        })
 }

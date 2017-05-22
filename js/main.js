@@ -2,7 +2,7 @@
  * Created by Daria on 31-Jan-17.
  */
 var cloudA, cloudB, cloudA2, cloudB2, city, city2, mountain, mountain2;
-var stage, timeoutResize
+var stage, timeoutResize;
 var train, gun, enemyShip, platform;
 var effectActive=false, moveStop=false, moveToRocket=false;
 var shots=[], enemyShots=[];
@@ -42,7 +42,7 @@ function init() {
     createjs.Ticker.setFPS(45);
     createjs.Ticker.addEventListener('tick', tock);
 
-    stage.enableMouseOver();
+    stage.enableMouseOver(10);
 
     muteButton.addEventListener("click", function () {
          if (isMuted) {
@@ -53,20 +53,6 @@ function init() {
             createjs.Sound.muted = isMuted;
          }
     });
-
-    /*firstText = new createjs.Text("Build your", "30px Arial Black", "#FFF");
-
-    skipButton = new createjs.Bitmap(queue.getResult("skip"));
-    skipButton.scaleX=0.5;
-    skipButton.scaleY=0.5;
-
-    goButton = new createjs.Bitmap(queue.getResult("go"));
-    goButton.scaleX=0.1;
-    goButton.scaleY=0.1;
-
-    goButton.addEventListener("click", game);
-
-    stage.addChild(firstText, skipButton, goButton, logo);*/
     game();
 
 
@@ -79,10 +65,6 @@ function game(){
         document.querySelector('#demoCanvas').classList.add('show');
     }, 300);
 
-    //stage.removeChild(firstText, skipButton,goButton);
-
-    /*createClouds();*/
-    //backgroundOpacity(1);
     createContent();
     resize();
 
@@ -113,7 +95,6 @@ function tock() {
         backgroundEffect(4);
         cloudEffect(4);
     }
-
     if(cloudA){
         cloudEffect(1);
     }
@@ -131,22 +112,6 @@ function resize() {
         stage.canvas.width = window.innerWidth;
         stage.canvas.height = window.innerHeight;
 
-        // Background: full screen redraw
-       /* bg.graphics.clear();
-        bg.graphics.beginBitmapFill(bg.img, "no-repeat").drawRect(0, 0, bg.img.width, bg.img.height);
-        bg.x=0;
-
-        bg.scaleX = parseFloat(stage.canvas.width / bg.img.width);
-        bg.scaleY = parseFloat(stage.canvas.height / bg.img.height);
-
-        bg2.graphics.clear();
-        bg2.graphics.beginBitmapFill(bg.img, "no-repeat").drawRect(0, 0, bg.img.width, bg.img.height);
-        bg2.x=bg.x+stage.canvas.width;
-
-        bg2.scaleX = parseFloat(stage.canvas.width / bg.img.width);
-        bg2.scaleY = parseFloat(stage.canvas.height / bg.img.height);*/
-       //stage.reload();
-        /*stage.cache(0,0,stage.canvas.width, stage.canvas.height);*/
         resizeContent();
     },200);
 
@@ -157,17 +122,16 @@ function createBackground() {
     createClouds();
     createMountains();
     createCity();
-    createTrees();
+    /*createTrees();*/
     stage.addChild(cloudA, cloudA2, cloudB, cloudB2, mountain, mountain2, city, city2);
-    /*bg = new createjs.Shape();
-    bg.x=0;
-    bg.img = queue.getResult('background');
+}
 
-    bg2 = new createjs.Shape();
-    bg2.x=stage.canvas.width;
+function backgroundResize(bg){
+    bg.graphics.clear();
+    bg.graphics.beginBitmapFill(bg.img, "no-repeat").drawRect(0, 0, bg.img.width, bg.img.height);
 
-    stage.addChild(bg, bg2);
-*/
+    bg.scaleX = parseFloat(stage.canvas.width / bg.img.width);
+    bg.scaleY = parseFloat(stage.canvas.height / bg.img.height);
 }
 
 function createClouds(){
@@ -179,13 +143,13 @@ function createClouds(){
     cloudA2.x=stage.canvas.width;
     cloudA2.img=queue.getResult('cloudA');
 
-    cloudB = new createjs.Shape();
+    /*cloudB = new createjs.Shape();
     cloudB.x=0;
     cloudB.img=queue.getResult('cloudB');
 
     cloudB2 = new createjs.Shape();
     cloudB2.x=stage.canvas.width;
-    cloudB2.img=queue.getResult('cloudB');
+    cloudB2.img=queue.getResult('cloudB');*/
 
 }
 
@@ -202,16 +166,17 @@ function createMountains(){
 function createCity(){
     city = new createjs.Shape();
     city.x=0;
-    city.y=-60;
+    city.y=22;
     city.img = queue.getResult('city');
 
     city2 = new createjs.Shape();
     city2.x=0;
-    city2.y=-60;
+    city2.y=22;
     city2.img = queue.getResult('city');
+
 }
 
-function createTrees(){
+/*function createTrees(){
     trees = new createjs.Shape();
     trees.x=0;
     trees.img = queue.getResult('trees');
@@ -224,15 +189,7 @@ function createTrees(){
     trees2.scaleX=1.5;
     trees2.scaleY=1.5;
 
-}
-
-function backgroundResize(bg){
-    bg.graphics.clear();
-    bg.graphics.beginBitmapFill(bg.img, "no-repeat").drawRect(0, 0, bg.img.width, bg.img.height);
-
-    bg.scaleX = parseFloat(stage.canvas.width / bg.img.width);
-    bg.scaleY = parseFloat(stage.canvas.height / bg.img.height);
-}
+}*/
 
 function backgroundEffect(speed){
     city.x-=speed*0.8;
@@ -244,14 +201,14 @@ function backgroundEffect(speed){
         city2.x=city.x+stage.canvas.width;
     }
 
-    trees.x-=speed;
+   /* trees.x-=speed;
     trees2.x-=speed;
     if (trees.x<=-stage.canvas.width){
         trees.x=trees2.x+stage.canvas.width;
     }
     if (trees2.x<=-stage.canvas.width){
         trees2.x=trees.x+stage.canvas.width;
-    }
+    }*/
 
     mountain.x-=speed*0.5;
     mountain2.x-=speed*0.5;
@@ -263,22 +220,12 @@ function backgroundEffect(speed){
     }
 }
 
-/*function backgroundOpacity(n){
-    bg.alpha=n;
-    bg2.alpha=n;
-
-    /!*cloudA.alpha=n;
-    cloudA2.alpha=n;
-
-    cloudB.alpha=n;
-    cloudB2.alpha=n;*!/
-}*/
 
 function cloudEffect(speed){
-    cloudA.x-=0.3*speed;
-    cloudA2.x-=0.3*speed;
-    cloudB.x-=0.5*speed;
-    cloudB2.x-=0.5*speed;
+    cloudA.x-=speed;
+    cloudA2.x-=speed;
+    /*cloudB.x-=speed;
+    cloudB2.x-=speed;*/
 
     if (cloudA.x<=-stage.canvas.width){
         cloudA.x=cloudA2.x+stage.canvas.width;
@@ -286,16 +233,16 @@ function cloudEffect(speed){
     if (cloudA2.x<=-stage.canvas.width){
         cloudA2.x=cloudA.x+stage.canvas.width;
     }
-    if (cloudB.x<=-stage.canvas.width){
+    /*if (cloudB.x<=-stage.canvas.width){
         cloudB.x=cloudB2.x+stage.canvas.width;
     }
     if (cloudB2.x<=-stage.canvas.width){
         cloudB2.x=cloudB.x+stage.canvas.width;
-    }
+    }*/
 }
 
-//CONTENT
 
+//CONTENT
 function createContent() {
 
     train = new createjs.Bitmap(queue.getResult("train"));
@@ -304,23 +251,16 @@ function createContent() {
     train.regX=train.width/2;
     train.regY=train.height/2;
     train.speed=6;
-   /* platform = new createjs.Shape();
-    platform.width=500;
-    platform.height=20;
-    platform.graphics.beginFill("#ffe500").drawRect(0,0,platform.width,platform.height);
-*/
+
     gun = new createjs.Bitmap(queue.getResult("gun"));
     gun.width=50;
     gun.height=50;
     gun.regX=gun.width/2;
     gun.regY=gun.height/2;
-    //gun.graphics.beginFill('red').drawRect(0,0,gun.width,gun.height);
 
-    stage.addChild(train, gun, platform, trees, trees2)
+    stage.addChild(train, gun, platform/*, trees, trees2*/)
 
 }
-
-
 
 function resizeContent(){
     muteButton.x=stage.canvas.width-muteButton.width-50;
@@ -333,11 +273,11 @@ function resizeContent(){
         backgroundResize(cloudA2);
         cloudA2.x=stage.canvas.width;
 
-        backgroundResize(cloudB);
+        /*backgroundResize(cloudB);
         cloudB.x=stage.canvas.width/4;
 
         backgroundResize(cloudB2);
-        cloudB2.x=stage.canvas.width+stage.canvas.width/4;
+        cloudB2.x=stage.canvas.width+stage.canvas.width/4;*/
     }
 
     if (mountain){
@@ -354,9 +294,14 @@ function resizeContent(){
 
         backgroundResize(city2);
         city2.x=stage.canvas.width;
+
+        city.scaleX=city.scaleX*1.001;
+        city.scaleY=city.scaleY*1.001;
+        city2.scaleX=city2.scaleX*1.001;
+        city2.scaleY=city2.scaleY*1.001;
     }
 
-    if (trees){
+    /*if (trees){
         backgroundResize(trees);
         trees.x=0;
         trees.y=30;
@@ -364,7 +309,7 @@ function resizeContent(){
         backgroundResize(trees2);
         trees2.x=stage.canvas.width;
         trees2.y=30;
-    }
+    }*/
 
     if (train){
         if (arrived || moveToRocket){
@@ -375,12 +320,6 @@ function resizeContent(){
         train.y=stage.canvas.height-(stage.canvas.height/6.7);
     }
 
-
-    /*if (platform){
-        platform.x=train.x-platform.width;
-        platform.y=train.y+(train.height-platform.height);
-    }
-*/
     if (gun){
         gun.y=train.y-train.height+gun.height/2;
         gun.x=train.x;
@@ -406,8 +345,6 @@ function resizeContent(){
         button.x=stage.canvas.width/2;
         button.y=stage.canvas.height/4;
 
-       /* buttonText.x=button.x-button.width/2+5;
-        buttonText.y=button.y-button.height/2;*/
     }
 
     if (grid.length>0 && counter<0) {
@@ -462,29 +399,17 @@ function resizeContent(){
         startText.x=stage.canvas.width/2;
         startText.y=stage.canvas.height-30;
 
-        /*house.x=0;
-        house.y=stage.canvas.height-house.height-(stage.canvas.height/11);*/
     }
-
-   /* if (firstText){
-        firstText.x=stage.canvas.width/2;
-        firstText.y=stage.canvas.height/2;
-    }
-
-    if(skipButton){
-        skipButton.x=firstText.x+50;
-        skipButton.y=firstText.y+50;
-
-        goButton.x=firstText.x-150;
-        goButton.y=skipButton.y+30;
-    }
-*/
 
     if (cloudBig){
         cloudBig.x=stage.canvas.width/2;
         cloudBig.y=stage.canvas.height/2;
+
         logo.x=stage.canvas.width/2;
         logo.y=stage.canvas.height/2;
+
+        siteButton.x=stage.canvas.width/2;
+        siteButton.y=logo.y+logo.width/2;
     }
 
 }

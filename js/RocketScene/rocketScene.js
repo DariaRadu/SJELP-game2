@@ -7,6 +7,7 @@ var counter=-1;
 
 function goToRocket(){
     if (initial){
+        createjs.Tween.removeAllTweens();
         stage.removeChild(startText);
 
         effectActive=false;
@@ -188,7 +189,7 @@ function moveBoxes(){
 
     if (counter<modulesAdded.length){
         modulesAdded[counter].alpha=1;
-        stage.addChild(modulesAdded[counter], train, gun, trees, trees2, rocket, muteButton);
+        stage.addChild(modulesAdded[counter], train, gun, /*trees, trees2,*/ rocket, muteButton);
         createjs.
         Tween.
         get(modulesAdded[counter]).
