@@ -43,11 +43,12 @@ canvas.preloadDone.show {
 
 .button-choice{
   width:200px;
-  border-radius:20px;
+  border-radius:5px;
   border: 1px black solid;
   margin-top:5px;
   margin-bottom:5px;
   background-color:white;
+  font-size:20px;
 }
 
 #choiceGame{
@@ -69,4 +70,28 @@ canvas.preloadDone.show {
 
 .not-displayed{
   display:none;
+}
+
+h1{
+  font-size:45px;
+}
+
+h2{
+  font-size: 40px;
+}
+
+p{
+  font-size:25px;
+
+}
+
+#safari{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#website{
+  display: block;
+  margin:0 auto;
 }

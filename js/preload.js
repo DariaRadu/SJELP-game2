@@ -1,4 +1,16 @@
 var stage, preloadText, queue;
+
+var isSafari = navigator.vendor && navigator.vendor.indexOf('Apple') > -1 &&
+    navigator.userAgent && !navigator.userAgent.match('CriOS');
+
+function noGame(){
+    var clone = document.querySelector("#safari").content.cloneNode(true);
+    var content = document.querySelector("body").appendChild( clone );
+    document.querySelector('#website').addEventListener('click',function(){
+        window.location.href = "http://www.sjelp.com/";
+    });
+}
+
 //HTML EFFECTS
 document.querySelector('.logo').classList.add('transition-opacity', 'in-view');
 setTimeout(function(){
@@ -6,17 +18,26 @@ setTimeout(function(){
 },700);
 setTimeout(function(){
     document.querySelector('.logo-screen').classList.add('transition-opacity', 'out-of-view');
-},2500);
+},3000);
 setTimeout(function(){
     document.querySelector('.logo-screen').classList.add('not-displayed');
     document.querySelector('.choice-screen').classList.remove('not-displayed');
     document.querySelector('.choice-screen').classList.add('in-view');
     document.querySelector('#choiceGame').addEventListener('click',function(){
         document.querySelector('.choice-screen').classList.add('not-displayed');
-        document.querySelector('#demoCanvas').classList.remove('not-displayed');
-        preload();
+        if (!isSafari && window.innerWidth>700){
+            document.querySelector('#demoCanvas').classList.remove('not-displayed');
+            preload();
+        }else{
+            noGame();
+        }
+
+    });
+    document.querySelector('#choiceSkip').addEventListener('click',function(){
+        window.location.href = "http://www.sjelp.com/";
     });
 },4000);
+
 
 
 //START PRELOADING

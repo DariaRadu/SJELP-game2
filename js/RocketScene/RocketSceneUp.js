@@ -101,13 +101,13 @@ function showLogo(){
     logo.scaleY=0.9;
 
     siteButton = new createjs.Bitmap (queue.getResult("siteButton"));
-    siteButton.width=150;
-    siteButton.height=50;
+    siteButton.width=300;
+    siteButton.height=75;
     siteButton.alpha=0;
     siteButton.regX=siteButton.width/2;
     siteButton.regY=siteButton.height/2;
     siteButton.x=stage.canvas.width/2;
-    siteButton.y=logo.y+logo.width/2;
+    siteButton.y=logo.y+logo.width/3;
 
     stage.addChild(logo, siteButton);
 

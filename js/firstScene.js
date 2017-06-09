@@ -11,7 +11,7 @@ function firstScene(){
 
     buttonStart = new createjs.Bitmap(queue.getResult("doneButton"));
     buttonStart.width=150;
-    buttonStart.height=50;
+    buttonStart.height=150;
     buttonStart.regX=buttonStart.width/2;
     buttonStart.regY=buttonStart.height/2;
     buttonStart.x=window.innerWidth-buttonStart.width*2;
@@ -171,7 +171,7 @@ function addModules(){
 }
 
 function goToSpaceship(){
-    createjs.Tween.removeAllTweens();
+    //createjs.Tween.removeAllTweens();
     if (modulesAdded.length>0){
         for (var row=0;row<grid.length;row++){
             for (var col=0;col<grid[row].length;col++){
@@ -196,5 +196,10 @@ function goToSpaceship(){
         }
         stage.removeChild(buttonStart);
         setTimeout(shootingScene, 3000)
-    }
+    }/*else{
+        var alertText = new createjs.Text("", "20px Arial", "#000);
+        alertText.x=buttonStart.x;
+        alertText.y=buttonStart.y-buttonStart.height/2;
+        stage.addChild(alertText);
+    }*/
 }

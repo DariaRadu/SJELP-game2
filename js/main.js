@@ -59,8 +59,6 @@ function init() {
 }
 
 function game(){
-    /*document.querySelector('#demoCanvas').classList.remove('preloadDone', "show");
-    document.querySelector('#demoCanvas').classList.add('preloadDone');*/
     setTimeout(function(){
         document.querySelector('#demoCanvas').classList.add('show');
     }, 300);
@@ -112,6 +110,11 @@ function resize() {
         stage.canvas.width = window.innerWidth;
         stage.canvas.height = window.innerHeight;
 
+        /*if (stage.canvas.width<700){
+            document.querySelector('#demoCanvas').classList.add('not-displayed');
+            noGame();
+        }
+*/
         resizeContent();
     },200);
 
@@ -394,7 +397,7 @@ function resizeContent(){
 
     if (buttonStart){
         buttonStart.x=window.innerWidth-buttonStart.width*2;
-        buttonStart.y=window.innerHeight/2+2*buttonStart.height;
+        buttonStart.y=window.innerHeight/2+buttonStart.height;
 
         startText.x=stage.canvas.width/2;
         startText.y=stage.canvas.height-30;
